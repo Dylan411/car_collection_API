@@ -5,7 +5,7 @@ class UserService {
 
     async getUsers() {
         try {
-            return await find();
+            return await userModel.find();
         } catch (error) {
             return error;
         }
@@ -13,7 +13,7 @@ class UserService {
 
     async insertCar(car, user) {
         try {
-            await findOneAndUpdate({
+            await userModel.findOneAndUpdate({
                 userName: user,
             }, {
                 $addToSet: {
@@ -30,7 +30,7 @@ class UserService {
 
     async login(user, pass) {
         try {
-            return await findOne({
+            return await userModel.findOne({
                 userName: user,
                 password: pass
             })
@@ -41,9 +41,9 @@ class UserService {
 
     async getCarsById(user) {
         try {
-            return await find(
+            return await userModel.find(
                 { userName: user },
-                '-_id -__v -password -userName'
+                '-_id -__v -password -userName -email'
             )
         } catch (error) {
             return error;
@@ -52,7 +52,7 @@ class UserService {
 
     async deleteCarsById(id, user) {
         try {
-            return await updateOne(
+            return await userModel.updateOne(
                 { userName: user },
                 { $pull: { cars: id } }
             )
@@ -63,13 +63,13 @@ class UserService {
 
     async signup(user,pass,email) {
         try {
-            var valid = await findOne({
+            var valid = await userModel.findOne({
                 userName: user,
                 email: email
             })
             console.log(valid)
             if (valid == null) {
-                await updateOne({
+                await userModel.updateOne({
                     userName: user
                 }, {
     

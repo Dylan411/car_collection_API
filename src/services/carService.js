@@ -54,6 +54,7 @@ class CarService {
     }
     async getCarsById(user) {
         var ids = await userS.getCarsById(user)
+        console.log(ids)
 
         try {
             return await carModel.find().where('_id').in(ids[0]['cars'])

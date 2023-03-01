@@ -5,7 +5,7 @@ const dbConnection = async() => {
         console.log('Conecting.....');
         mongosee.set("strictQuery", false);
         mongosee.set('debug', true);
-        mongosee.connect(process.env.MONGODB,{
+        mongosee.connect('mongodb+srv://DLN:1234@dln.aoi5wkx.mongodb.net/CarsColletionDB?retryWrites=true&w=majority',{
         useNewUrlParser: true,
         useUnifiedTopology: true
     });
