@@ -36,4 +36,22 @@ const deleteCarsById = async(req,res) => {
     );
 }
 
-module.exports = {getUsers,insertCar,login,getCarsById,deleteCarsById,signup};
+const sendEmail = async(req,res) => {
+    res.json(
+        await userService.sendEmail(req.params['email'])
+    );
+}
+
+const verifyCode = async(req,res) => {
+    res.json(
+        await userService.verifyCode(req.params['email'],req.params['code'])
+    );
+}
+
+const changePassword = async(req,res) => {
+    res.json(
+        await userService.changePassword(req.params['email'],req.params['pass'])
+    );
+}
+
+module.exports = {getUsers,insertCar,login,getCarsById,deleteCarsById,signup,sendEmail,verifyCode,changePassword};
